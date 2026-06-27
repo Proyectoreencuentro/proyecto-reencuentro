@@ -87,6 +87,7 @@
   const COL_CIUDAD    = 5;
   const COL_UBICACION = 6;
   const COL_NOMBRE_R  = 9;
+  const COL_OBS       = 12;
   const COL_FOTO      = 13;
   const COL_ESTADO    = 15;
   const COL_ID        = 16;
@@ -129,6 +130,7 @@
     const ciudad     = caso[COL_CIUDAD]    || '';
     const ubicacion  = caso[COL_UBICACION] || '';
     const reportante = caso[COL_NOMBRE_R]  || '';
+    const obs        = caso[COL_OBS]       || '';
     const foto       = driveUrl(caso[COL_FOTO] || '');
     const estado     = caso[COL_ESTADO]    || 'Reportado';
     const id         = caso[COL_ID]        || '';
@@ -147,9 +149,10 @@
         <div class="foto-wrap">${fotoHTML}</div>
         <div class="tarjeta-body">
           <h2>${nombre}</h2>
-          ${ciudad    ? `<div class="detalle"><span>📍</span><span>${ciudad}</span></div>` : ''}
-          ${ubicacion ? `<div class="detalle"><span>🗺️</span><span>${ubicacion}</span></div>` : ''}
-          ${reportante? `<div class="detalle"><span>👤</span><span>Reportado por: ${reportante}</span></div>` : ''}
+          ${ciudad     ? `<div class="detalle"><span>📍</span><span>${ciudad}</span></div>` : ''}
+          ${ubicacion  ? `<div class="detalle"><span>🗺️</span><span>${ubicacion}</span></div>` : ''}
+          ${reportante ? `<div class="detalle"><span>👤</span><span>Reportado por: ${reportante}</span></div>` : ''}
+          ${obs        ? `<div class="detalle"><span>📝</span><span>${obs}</span></div>` : ''}
           <span class="badge ${badgeClass(estado)}">${estado}</span>
           ${id ? `<div class="id-caso">${id}</div>` : ''}
         </div>
