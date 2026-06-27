@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -10,6 +10,7 @@
     header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 2rem 1rem; text-align: center; border-bottom: 3px solid #e94560; }
     header h1 { font-size: 2rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
     header p { color: #a0aec0; margin-top: 0.5rem; font-size: 0.95rem; }
+    .header-botones { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem; }
     .alerta { background: #e94560; color: #fff; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; }
     .controles { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; }
     .controles input, .controles select { padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid #2d3748; background: #1a202c; color: #e8e8e8; font-size: 0.95rem; width: 100%; }
@@ -38,7 +39,24 @@
     #sin-resultados { text-align: center; padding: 3rem; color: #718096; display: none; }
     #error-msg { text-align: center; padding: 2rem; color: #fc8181; display: none; font-size: 0.9rem; }
     footer { text-align: center; padding: 2rem; color: #4a5568; font-size: 0.8rem; border-top: 1px solid #2d3748; }
-    @media (max-width: 560px) { header h1 { font-size: 1.4rem; } .controles { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } }
+
+    /* Modal colaborador */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.activo { display: flex; }
+    .modal { background: #1a202c; border-radius: 14px; border: 1px solid #2d3748; max-width: 500px; width: 100%; padding: 2rem; position: relative; }
+    .modal-cerrar { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #718096; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .modal-cerrar:hover { color: #e8e8e8; }
+    .modal h2 { color: #f6e05e; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .modal p { color: #a0aec0; font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
+    .modal ul { color: #a0aec0; font-size: 0.88rem; line-height: 1.8; margin: 0.5rem 0 1.2rem 1.2rem; }
+    .modal-nota { background: #2d3748; border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.82rem; color: #718096; margin-bottom: 1.4rem; border-left: 3px solid #4a5568; }
+
+    @media (max-width: 560px) {
+      header h1 { font-size: 1.4rem; }
+      .controles { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .header-botones { flex-direction: column; align-items: center; }
+    }
   </style>
 </head>
 <body>
@@ -48,13 +66,46 @@
 <header>
   <h1>🔍 Proyecto Reencuentro</h1>
   <p>Registro de personas desaparecidas · Reporta o busca un caso</p>
-  <p style="margin-top:0.8rem;">
+  <div class="header-botones">
     <a href="https://forms.gle/CbqgTxuQDn58g3cy8" target="_blank"
        style="background:#e94560;color:#fff;padding:0.5rem 1.4rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.9rem;">
-      + Reportar persona desaparecida
+      🔴 Reportar persona desaparecida
     </a>
-  </p>
+    <button onclick="document.getElementById('modalColaborador').classList.add('activo')"
+       style="background:#d69e2e;color:#1a202c;padding:0.5rem 1.4rem;border-radius:6px;border:none;font-weight:700;font-size:0.9rem;cursor:pointer;">
+      🟡 Reportar persona hallada
+    </button>
+  </div>
 </header>
+
+<!-- Modal Colaborador -->
+<div class="modal-overlay" id="modalColaborador">
+  <div class="modal">
+    <button class="modal-cerrar" onclick="document.getElementById('modalColaborador').classList.remove('activo')">✕</button>
+    <h2>🤝 ¿Encontraste a alguien?</h2>
+    <p>Para mantener este sistema limpio, confiable y seguro, <strong>solo colaboradores verificados</strong> pueden reportar personas halladas.</p>
+    <p>Los colaboradores son personas que se encuentran directamente en:</p>
+    <ul>
+      <li>Zonas afectadas por la tragedia</li>
+      <li>Centros de acopio y suministros</li>
+      <li>Puntos de atención humanitaria</li>
+    </ul>
+    <div class="modal-nota">
+      🔒 Este control existe para evitar información falsa que pueda generar falsas esperanzas o confusión en las familias afectadas.
+    </div>
+    <p>Si estás en alguno de estos lugares y quieres ser parte del equipo, escríbenos por WhatsApp incluyendo:</p>
+    <ul>
+      <li>Tu nombre completo</li>
+      <li>Correo que vas a usar</li>
+      <li>Tu función actual en la contingencia</li>
+      <li>Lugar donde te encuentras</li>
+    </ul>
+    <a href="https://wa.me/message/5DQINEKXLW6IP1?src=qr" target="_blank"
+       style="display:block;text-align:center;background:#25d366;color:#fff;padding:0.75rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.95rem;margin-top:0.5rem;">
+      💬 Contactar por WhatsApp
+    </a>
+  </div>
+</div>
 
 <div class="controles">
   <input type="text" id="buscarNombre" placeholder="🔎 Buscar por nombre...">
@@ -81,7 +132,6 @@
   const CSV_DESAPARECIDOS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRmEleHEMuVSzlfa2qItMepGi_ojWfzKFn6Z6QNUNBMrjXr-T3j2IYiHjszx3KdAa1X3wAkR7H8tZui/pub?gid=332903963&single=true&output=csv';
   const CSV_HALLADOS      = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRmEleHEMuVSzlfa2qItMepGi_ojWfzKFn6Z6QNUNBMrjXr-T3j2IYiHjszx3KdAa1X3wAkR7H8tZui/pub?gid=264650718&single=true&output=csv';
 
-  // Columnas desaparecidos
   const COL_NOMBRE    = 2;
   const COL_CEDULA    = 3;
   const COL_CIUDAD    = 5;
@@ -92,16 +142,12 @@
   const COL_ESTADO    = 15;
   const COL_ID        = 16;
 
-  // Columnas hallados
   const H_NOMBRE   = 1;
   const H_CEDULA   = 2;
   const H_DONDE    = 3;
   const H_CONTACTO = 4;
   const H_OBS      = 5;
   const H_FOTO     = 6;
-
-  let todosDesaparecidos = [];
-  let todosHallados      = [];
 
   function driveUrl(url) {
     if (!url) return '';
@@ -114,7 +160,6 @@
     if (estado === 'En verificación')        return 'badge-verificacion';
     if (estado === 'Posible localizado')     return 'badge-localizado';
     if (estado === 'Cerrado verificado')     return 'badge-cerrado';
-    if (estado === 'Hallado')                return 'badge-hallado';
     return 'badge-reportado';
   }
 
@@ -201,16 +246,13 @@
     const tipo      = document.getElementById('filtroEstado').value;
     const tarjetas  = document.querySelectorAll('.tarjeta');
     let visibles = 0;
-
     tarjetas.forEach(t => {
-      const okNombre = !txtNombre || t.dataset.nombre.includes(txtNombre);
-      const okCedula = !txtCedula || t.dataset.cedula.includes(txtCedula);
-      const okTipo   = !tipo      || t.dataset.tipo === tipo;
-      const ok = okNombre && okCedula && okTipo;
+      const ok = (!txtNombre || t.dataset.nombre.includes(txtNombre))
+              && (!txtCedula || t.dataset.cedula.includes(txtCedula))
+              && (!tipo      || t.dataset.tipo === tipo);
       t.style.display = ok ? '' : 'none';
       if (ok) visibles++;
     });
-
     document.getElementById('contador').textContent = visibles + ' resultado(s) encontrado(s)';
     document.getElementById('sin-resultados').style.display = visibles === 0 ? 'block' : 'none';
   }
@@ -230,21 +272,16 @@
       const textD = await respD.text();
       const textH = await respH.text();
 
-      todosDesaparecidos = parseCSV(textD).filter(c => c[COL_ID] && c[COL_ID].toString().trim() !== '' && c[COL_ESTADO] !== 'Cerrado verificado');
-      todosHallados      = parseCSV(textH).filter(c => c[H_NOMBRE] && c[H_NOMBRE].toString().trim() !== '');
+      const desaparecidos = parseCSV(textD).filter(c => c[COL_ID] && c[COL_ID].toString().trim() !== '' && c[COL_ESTADO] !== 'Cerrado verificado');
+      const hallados      = parseCSV(textH).filter(c => c[H_NOMBRE] && c[H_NOMBRE].toString().trim() !== '');
 
-      const htmlD = todosDesaparecidos.map(renderDesaparecido).join('');
-      const htmlH = todosHallados.map(renderHallado).join('');
-
-      document.getElementById('grid').innerHTML = htmlD + htmlH;
+      document.getElementById('grid').innerHTML = desaparecidos.map(renderDesaparecido).join('') + hallados.map(renderHallado).join('');
       document.getElementById('cargando').style.display = 'none';
 
-      const total = todosDesaparecidos.length + todosHallados.length;
-      document.getElementById('contador').textContent = total + ' caso(s) en el sistema';
+      const total = desaparecidos.length + hallados.length;
+      document.getElementById('contador').textContent = desaparecidos.length + ' desaparecido(s) · ' + hallados.length + ' hallado(s)';
 
-      if (document.getElementById('grid').innerHTML.trim() === '') {
-        document.getElementById('sin-resultados').style.display = 'block';
-      }
+      if (total === 0) document.getElementById('sin-resultados').style.display = 'block';
 
       document.getElementById('buscarNombre').addEventListener('input', filtrar);
       document.getElementById('buscarCedula').addEventListener('input', filtrar);
@@ -256,6 +293,11 @@
       document.getElementById('error-msg').style.display = 'block';
     }
   }
+
+  // Cerrar modal al hacer clic fuera
+  document.getElementById('modalColaborador').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('activo');
+  });
 
   cargar();
   setInterval(cargar, 300000);
