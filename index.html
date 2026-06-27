@@ -7,83 +7,36 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e8e8e8; min-height: 100vh; }
-
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      padding: 2rem 1rem; text-align: center;
-      border-bottom: 3px solid #e94560;
-    }
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 2rem 1rem; text-align: center; border-bottom: 3px solid #e94560; }
     header h1 { font-size: 2rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
     header p { color: #a0aec0; margin-top: 0.5rem; font-size: 0.95rem; }
-
-    .alerta {
-      background: #e94560; color: #fff; text-align: center;
-      padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;
-    }
-
-    .controles {
-      max-width: 960px; margin: 1.5rem auto; padding: 0 1rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
-    }
-    .controles input, .controles select {
-      padding: 0.7rem 1rem; border-radius: 8px;
-      border: 1px solid #2d3748; background: #1a202c;
-      color: #e8e8e8; font-size: 0.95rem; width: 100%;
-    }
+    .alerta { background: #e94560; color: #fff; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; }
+    .controles { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .controles input, .controles select { padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid #2d3748; background: #1a202c; color: #e8e8e8; font-size: 0.95rem; width: 100%; }
     .controles input::placeholder { color: #718096; }
-    .busqueda-nota {
-      max-width: 960px; margin: -0.5rem auto 0.5rem;
-      padding: 0 1rem; font-size: 0.75rem; color: #718096;
-    }
-
+    .busqueda-nota { max-width: 960px; margin: -0.5rem auto 0.5rem; padding: 0 1rem; font-size: 0.75rem; color: #718096; }
     #contador { max-width: 960px; margin: 0 auto 1rem; padding: 0 1rem; color: #718096; font-size: 0.85rem; }
-
-    .grid {
-      max-width: 960px; margin: 0 auto 3rem; padding: 0 1rem;
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem;
-    }
-
-    .tarjeta {
-      background: #1a202c; border-radius: 12px; overflow: hidden;
-      border: 1px solid #2d3748; transition: transform 0.2s, border-color 0.2s;
-    }
+    .grid { max-width: 960px; margin: 0 auto 3rem; padding: 0 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+    .tarjeta { background: #1a202c; border-radius: 12px; overflow: hidden; border: 1px solid #2d3748; transition: transform 0.2s, border-color 0.2s; }
     .tarjeta:hover { transform: translateY(-4px); border-color: #e94560; }
-
-    .foto-wrap {
-      width: 100%; height: 210px; background: #2d3748;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
+    .foto-wrap { width: 100%; height: 210px; background: #2d3748; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .foto-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .sin-foto { font-size: 3.5rem; color: #4a5568; }
-
     .tarjeta-body { padding: 1rem; }
     .tarjeta-body h2 { font-size: 1.05rem; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
     .detalle { font-size: 0.82rem; color: #a0aec0; margin-bottom: 0.3rem; display: flex; align-items: flex-start; gap: 0.4rem; }
     .detalle span:first-child { font-size: 0.9rem; flex-shrink: 0; }
-
-    .badge {
-      display: inline-block; margin-top: 0.7rem;
-      padding: 0.25rem 0.7rem; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    }
+    .badge { display: inline-block; margin-top: 0.7rem; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     .badge-reportado    { background: #744210; color: #fbd38d; }
     .badge-verificacion { background: #1a365d; color: #90cdf4; }
     .badge-localizado   { background: #1c4532; color: #9ae6b4; }
     .badge-cerrado      { background: #1a202c; color: #718096; border: 1px solid #4a5568; }
-
     .id-caso { font-size: 0.7rem; color: #4a5568; margin-top: 0.5rem; }
-
     #cargando { text-align: center; padding: 4rem; color: #718096; font-size: 1rem; }
     #sin-resultados { text-align: center; padding: 3rem; color: #718096; display: none; }
     #error-msg { text-align: center; padding: 2rem; color: #fc8181; display: none; font-size: 0.9rem; }
-
     footer { text-align: center; padding: 2rem; color: #4a5568; font-size: 0.8rem; border-top: 1px solid #2d3748; }
-
-    @media (max-width: 560px) {
-      header h1 { font-size: 1.4rem; }
-      .controles { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 560px) { header h1 { font-size: 1.4rem; } .controles { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -118,7 +71,7 @@
 
 <div id="contador"></div>
 <div id="cargando">⏳ Cargando casos...</div>
-<div id="error-msg">⚠️ Error al cargar los datos. Si el problema persiste, verifica que el Sheet esté publicado como CSV.</div>
+<div id="error-msg">⚠️ Error al cargar los datos. Verifica que el Sheet esté publicado como CSV.</div>
 <div id="sin-resultados">😔 No se encontraron casos con esos filtros.</div>
 <div class="grid" id="grid"></div>
 
@@ -139,18 +92,19 @@
   const COL_ID        = 16;
 
   let todosLosCasos = [];
+  let eventosRegistrados = false;
 
   function driveUrl(url) {
     if (!url) return '';
     const match = url.match(/[-\w]{25,}/);
-    return match ? 'https://drive.google.com/uc?export=view&id=' + match[0] : url;
+    return match ? 'https://lh3.googleusercontent.com/d/' + match[0] : url;
   }
 
   function badgeClass(estado) {
-    if (!estado || estado === 'Reportado')      return 'badge-reportado';
-    if (estado === 'En verificación')            return 'badge-verificacion';
-    if (estado === 'Posible localizado')         return 'badge-localizado';
-    if (estado === 'Cerrado verificado')         return 'badge-cerrado';
+    if (!estado || estado === 'Reportado')    return 'badge-reportado';
+    if (estado === 'En verificación')          return 'badge-verificacion';
+    if (estado === 'Posible localizado')       return 'badge-localizado';
+    if (estado === 'Cerrado verificado')       return 'badge-cerrado';
     return 'badge-reportado';
   }
 
@@ -171,14 +125,14 @@
   }
 
   function renderTarjeta(caso) {
-    const nombre    = caso[COL_NOMBRE]    || 'Sin nombre';
-    const ciudad    = caso[COL_CIUDAD]    || '';
-    const ubicacion = caso[COL_UBICACION] || '';
-    const reportante= caso[COL_NOMBRE_R]  || '';
-    const foto      = driveUrl(caso[COL_FOTO] || '');
-    const estado    = caso[COL_ESTADO]    || 'Reportado';
-    const id        = caso[COL_ID]        || '';
-    const cedula    = caso[COL_CEDULA]    || '';
+    const nombre     = caso[COL_NOMBRE]    || 'Sin nombre';
+    const ciudad     = caso[COL_CIUDAD]    || '';
+    const ubicacion  = caso[COL_UBICACION] || '';
+    const reportante = caso[COL_NOMBRE_R]  || '';
+    const foto       = driveUrl(caso[COL_FOTO] || '');
+    const estado     = caso[COL_ESTADO]    || 'Reportado';
+    const id         = caso[COL_ID]        || '';
+    const cedula     = caso[COL_CEDULA]    || '';
 
     const fotoHTML = foto
       ? `<img src="${foto}" alt="Foto de ${nombre}" onerror="this.parentElement.innerHTML='<span class=\"sin-foto\">👤</span>'">`
@@ -193,9 +147,9 @@
         <div class="foto-wrap">${fotoHTML}</div>
         <div class="tarjeta-body">
           <h2>${nombre}</h2>
-          ${ciudad     ? `<div class="detalle"><span>📍</span><span>${ciudad}</span></div>` : ''}
-          ${ubicacion  ? `<div class="detalle"><span>🗺️</span><span>${ubicacion}</span></div>` : ''}
-          ${reportante ? `<div class="detalle"><span>👤</span><span>Reportado por: ${reportante}</span></div>` : ''}
+          ${ciudad    ? `<div class="detalle"><span>📍</span><span>${ciudad}</span></div>` : ''}
+          ${ubicacion ? `<div class="detalle"><span>🗺️</span><span>${ubicacion}</span></div>` : ''}
+          ${reportante? `<div class="detalle"><span>👤</span><span>Reportado por: ${reportante}</span></div>` : ''}
           <span class="badge ${badgeClass(estado)}">${estado}</span>
           ${id ? `<div class="id-caso">${id}</div>` : ''}
         </div>
@@ -203,8 +157,9 @@
   }
 
   function poblarFiltroCiudad(casos) {
-    const ciudades = [...new Set(casos.map(c => c[COL_CIUDAD]).filter(Boolean))].sort();
     const sel = document.getElementById('filtroCiudad');
+    while (sel.options.length > 1) sel.remove(1);
+    const ciudades = [...new Set(casos.map(c => c[COL_CIUDAD]).filter(Boolean))].sort();
     ciudades.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c.toLowerCase(); opt.textContent = c;
@@ -217,20 +172,16 @@
     const txtCedula = document.getElementById('buscarCedula').value.toLowerCase().trim();
     const estado    = document.getElementById('filtroEstado').value;
     const ciudad    = document.getElementById('filtroCiudad').value;
-
-    const tarjetas = document.querySelectorAll('.tarjeta');
+    const tarjetas  = document.querySelectorAll('.tarjeta');
     let visibles = 0;
-
     tarjetas.forEach(t => {
-      const okNombre = !txtNombre || t.dataset.nombre.includes(txtNombre);
-      const okCedula = !txtCedula || t.dataset.cedula.includes(txtCedula);
-      const okEstado = !estado   || t.dataset.estado === estado;
-      const okCiudad = !ciudad   || t.dataset.ciudad === ciudad;
-      const visible  = okNombre && okCedula && okEstado && okCiudad;
-      t.style.display = visible ? '' : 'none';
-      if (visible) visibles++;
+      const ok = (!txtNombre || t.dataset.nombre.includes(txtNombre))
+              && (!txtCedula || t.dataset.cedula.includes(txtCedula))
+              && (!estado    || t.dataset.estado === estado)
+              && (!ciudad    || t.dataset.ciudad === ciudad);
+      t.style.display = ok ? '' : 'none';
+      if (ok) visibles++;
     });
-
     document.getElementById('contador').textContent = visibles + ' caso(s) encontrado(s)';
     document.getElementById('sin-resultados').style.display = visibles === 0 ? 'block' : 'none';
   }
@@ -248,24 +199,20 @@
       document.getElementById('cargando').style.display = 'none';
       document.getElementById('error-msg').style.display = 'none';
 
-      const grid = document.getElementById('grid');
-      if (activos.length === 0) {
-        grid.innerHTML = '';
-        document.getElementById('contador').textContent = 'No hay casos activos aún.';
-        return;
-      }
-
       poblarFiltroCiudad(activos);
-      grid.innerHTML = activos.map(renderTarjeta).join('');
+      const grid = document.getElementById('grid');
+      grid.innerHTML = activos.length > 0 ? activos.map(renderTarjeta).join('') : '';
       document.getElementById('contador').textContent = activos.length + ' caso(s) activo(s)';
 
-      document.getElementById('buscarNombre').addEventListener('input', filtrar);
-      document.getElementById('buscarCedula').addEventListener('input', filtrar);
-      document.getElementById('filtroEstado').addEventListener('change', filtrar);
-      document.getElementById('filtroCiudad').addEventListener('change', filtrar);
-
+      if (!eventosRegistrados) {
+        document.getElementById('buscarNombre').addEventListener('input', filtrar);
+        document.getElementById('buscarCedula').addEventListener('input', filtrar);
+        document.getElementById('filtroEstado').addEventListener('change', filtrar);
+        document.getElementById('filtroCiudad').addEventListener('change', filtrar);
+        eventosRegistrados = true;
+      }
     } catch (err) {
-      console.error('Error cargando CSV:', err);
+      console.error('Error:', err);
       document.getElementById('cargando').style.display = 'none';
       document.getElementById('error-msg').style.display = 'block';
     }
